@@ -4,6 +4,6 @@ in actual implementation
 all these data will be inputed by the organiser
 
 content:
-    zone_coordinate
-    event_venue_map
+    zone_coordinate.txt
+    event_venue_map.png
     radius
