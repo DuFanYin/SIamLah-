@@ -1,6 +1,16 @@
 # all service layer functions
 
 from PIL import Image, ImageDraw, ImageFont
+#parameter for demo
+radius = 50
+zone_coor_file_path = 'test_data/zone_coordinate.txt'
+final_output_path = 'final_hm.png'
+
+array_size = (1762, 1347)  # Size of the image (width, height)
+radius = 80  # Radii of the circles
+
+colors = [(255, 0, 0, 128), (0, 255, 0, 128), (0, 0, 255, 128), (0, 0, 255, 128)]  # Colors of the circles (RGBA)
+
 #-----------------------------------------------------------Funcitons for heat map generation
 # helper function to read preset data
 # to outpur dict of zone_coor
@@ -16,10 +26,6 @@ def read_zone_coor(file_path):
             zone_dict[zone_name] = coor
     return(zone_dict)
 
-file_path = 'test_data/zone_coordinate.txt'
-
-radius = 80
-
 # function 1 
 # input:  number_per_zone, a  dictionary {zone_id : number_in_the_zone}
 # output: reletive_scal, a dictionary { zone_id : reletive_density}
@@ -33,13 +39,9 @@ def generate_zone_color(number_per_zone, radius):
     zone_color = {}
     for n in range(0,len(index_list)):
         zone_color[zone_nums[n]]=index_list[n]
-    
     return zone_color
 
 # zone_color = generate_zone_color(number_per_zone, radius)
-
-
-zone_coor = read_zone_coor(file_path)
 
 def generate_hm(array_size, zone_coor, radius, colors):
     # Create a blank image with a translucent (alpha) background
@@ -77,13 +79,6 @@ def generate_hm(array_size, zone_coor, radius, colors):
     # Save the image to a file
     img.save(output_path, 'PNG')
 
-# Example usage
-array_size = (1762, 1347)  # Size of the image (width, height)
-radius = 80  # Radii of the circles
-colors = [(255, 0, 0, 128), (0, 255, 0, 128), (0, 0, 255, 128), (0, 0, 255, 128)]  # Colors of the circles (RGBA)
-
-output_path = 'heatmap.png'
-generate_hm(array_size, zone_coor, radius, colors)
 
 def overlap_images(output_path):
     image2_path = 'test_data/heatmap.png'
@@ -105,8 +100,11 @@ def overlap_images(output_path):
 
 # Example usage
 
-output_path = 'final_hm.png'
-overlap_images(output_path)
+zone_coor = read_zone_coor(zone_coor_file_path)
+# zone_color = ??? right now is hard coded
+
+generate_hm(array_size, zone_coor, radius, colors)
+overlap_images(final_output_path)
 
 
 
