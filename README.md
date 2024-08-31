@@ -14,6 +14,9 @@
 
 
 
+password for admin login: admin123
+qr code:  scan any qrcode
+
 
 <h1>Funcitons used in service layer</h1>
 <h2>Helper functions</h2>
