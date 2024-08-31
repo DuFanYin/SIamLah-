@@ -1,7 +1,7 @@
 # all service layer functions
 from PIL import Image, ImageDraw, ImageFont
 
-#-----------------------------------------------------------helper functions
+#------------------------------------------------------------------------------------helper functions
 # generate color catgaries
 def green_to_red(value, transparent=1):
     green = (0, 255, 0)
@@ -10,7 +10,6 @@ def green_to_red(value, transparent=1):
     # Interpolate between green and red
     r = int(green[0] + (red[0] - green[0]) * value)
     g = int(green[1] + (red[1] - green[1]) * value)
-
     return (r, g, 0, int(transparent * 255))
 
 c1 = green_to_red(0) 
@@ -19,10 +18,9 @@ c3 = green_to_red(0.5)
 c4 = green_to_red(0.75) 
 c5 = green_to_red(1) 
 
-color_cat = [c1, c2, c3, c4, c5]
+color_cat = [c1, c2, c3, c4, c5] # 5 categaries based the population density
 
-# helper function to read preset data
-# to output dict of zone_coordinate
+# helper function to read preset data, dict of zone_coordinate
 def read_zone_coor(file_path):
     zone_dict = {} 
     with open(file_path, 'r') as file: 
@@ -35,9 +33,8 @@ def read_zone_coor(file_path):
             zone_dict[zone_name] = coor
     return(zone_dict)
 
-#-----------------------------------------------------------Funcitons for heat map generation
+#------------------------------------------------------------------------------------Funcitons for heat map generation
 
-# function 1 
 # input:  number_of_participants_per_zone, a  dictionary {zone_id : number_in_the_zone}
 # output: zone colour, a dictionary { zone_id : zone_colour}
 def generate_zone_color(zone_number):
@@ -51,7 +48,7 @@ def generate_zone_color(zone_number):
         if cat >= 1 :
             index_list.append(4)
         else:
-            index_list.append( int(cat// 0.25 ))
+            index_list.append( int(cat// 0.25 ))    # categersie according the population density and assign color code
 
     zone_color = {}
     for n in range(0,len(index_list)):
@@ -63,11 +60,11 @@ def generate_hm(array_size, zone_coor, radius, zone_color):
     # Create a blank image with a translucent (alpha) background
     img = Image.new('RGBA', array_size, (0, 0, 0, 0))  # Fully transparent background
     draw = ImageDraw.Draw(img)
-    output_path = 'heatmap.png'
+    output_path = 'temp_heatmap.png'
 
     # Load a font
     try:
-        # You can use a TTF font file from your system or use the default PIL font
+        # Use a TTF font file from system or the default PIL font
         font = ImageFont.truetype("arial.ttf", 20)
     except IOError:
         font = ImageFont.load_default()
@@ -78,7 +75,6 @@ def generate_hm(array_size, zone_coor, radius, zone_color):
        colors.append(zone_color[element])
 
     # Draw each circle and its label
-
     for center, color, label in zip(centers, colors, labels):
         # Draw the circle
         left_up_point = (center[0] - radius, center[1] - radius)
@@ -93,12 +89,13 @@ def generate_hm(array_size, zone_coor, radius, zone_color):
         text_y = center[1] - text_height / 2
         draw.text((text_x, text_y), label, fill=(255, 255, 255, 255), font=font)  # White color for label
 
-    # Save the image to a file
+    # Save the image
     img.save(output_path, 'PNG')
 
 
+# produce the final heatmap
 def overlap_images(output_path):
-    image2_path = 'heatmap.png'
+    image2_path = 'temp_heatmap.png'
     image1_path =  'map.png'
     # Open the two images
     img1 = Image.open(image1_path).convert('RGBA')
