@@ -1,10 +1,16 @@
 
+<h1>File structure </h1>
 
-
-
-
-
-
+- SiamLah.apk                 # release version of the moblie app
+- server
+    - final_heat_map.png      # heat_map shown for client
+    - main.py                 # server entry point
+    - map.png                 # event venue map
+    - modules.py              # functions uesd at service layer
+    - temp_heatmap.png        # intermediate step before final_heatmap
+    - zone_coordinate.txt     # preset zone coordiantes
+- client
+    - App.tsx                 # main client side code
 
 
 
@@ -24,5 +30,10 @@
 <p> Uses pillow library to draw a png with transparent background. Showing the zones as colored circles.</p>
 <h3> overlap_images(output_path) </h3>
 <p> Over lap the temperary heatmap onto the event venue map to form the final heatmap user will be seeing</p>
+
+
+Reference
+
+OpenAI. (2024). ChatGPT (31 Aug version) [Large language model]. https://chat.openai.com/chat
 
 
