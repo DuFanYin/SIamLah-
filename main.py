@@ -51,7 +51,7 @@ def update_zone_number():
 @app.route('/image', methods=['GET'])
 def get_image():
     # Path to the heatmap
-    image_path = 'final_hm.png'
+    image_path = 'final_heatmap.png'
     # generate color code for each zone
     zone_color = generate_zone_color(zone_number)
     # retrive zone coordinates
