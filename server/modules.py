@@ -60,7 +60,7 @@ def generate_hm(array_size, zone_coor, radius, zone_color):
     # Create a blank image with a translucent (alpha) background
     img = Image.new('RGBA', array_size, (0, 0, 0, 0))  # Fully transparent background
     draw = ImageDraw.Draw(img)
-    output_path = 'temp_heatmap.png'
+    output_path = '/tmp/temp_heatmap.png'
 
     # Load a font
     try:
@@ -95,7 +95,7 @@ def generate_hm(array_size, zone_coor, radius, zone_color):
 
 # produce the final heatmap
 def overlap_images(output_path):
-    image2_path = 'temp_heatmap.png'
+    image2_path = '/tmp/temp_heatmap.png'
     image1_path =  'map.png'
     # Open the two images
     img1 = Image.open(image1_path).convert('RGBA')

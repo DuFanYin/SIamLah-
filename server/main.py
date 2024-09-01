@@ -9,7 +9,7 @@ CORS(app)
 radius = 100
 zone_coor_file_path = 'zone_coordinate.txt'
 
-final_output_path = 'final_heatmap.png'
+final_output_path = '/tmp/final_heatmap.png'
 array_size = (1762, 1347)  # Size of the event venue image (width, height)
 
 # hard coded dictoinary with initial zone_number set 
@@ -51,7 +51,7 @@ def update_zone_number():
 @app.route('/image', methods=['GET'])
 def get_image():
     # Path to the heatmap
-    image_path = 'final_heatmap.png'
+    image_path = '/tmp/final_heatmap.png'
     # generate color code for each zone
     zone_color = generate_zone_color(zone_number)
     # retrive zone coordinates
@@ -62,7 +62,7 @@ def get_image():
     overlap_images(final_output_path)
     
     # Return the image as a response
-    return send_file(image_path, mimetype='image/png')
+    return send_file(image_path, mimetype='/tmp/image/png')
 
 # server entry point
 if __name__ == '__main__':
