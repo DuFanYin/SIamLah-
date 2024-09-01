@@ -14,11 +14,19 @@ array_size = (1762, 1347)  # Size of the event venue image (width, height)
 
 # hard coded dictoinary with initial zone_number set 
 zone_number = {
-    "a":3000 ,
-    "b":1500 ,
-    "c":2000 ,
-    "d":3000 ,
+    "hub_1":3000 ,
+    "hub_2":1500 ,
+    "hub_3":2000 ,
+    "hub_4":3000 ,
 }
+
+messages = {
+    "admin" : " ",
+    "participant" : " ",
+    "hub_1" : " ",
+    "hub_2" : " ",
+    "hub_3" : " "
+    }
 
 app = Flask(__name__)
 
@@ -36,8 +44,7 @@ def update_zone_number():
         uniqueID = str(data.get('uniqueID'))
         deviceCount = int(data.get('deviceCount'))
         zone_number[uniqueID] = deviceCount
-        print(zone_number)
-        
+    
         # Process the data
         return jsonify({
             'receivedUniqueID': uniqueID,
@@ -45,6 +52,37 @@ def update_zone_number():
         }), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 400
+    
+@app.route('/message/post', methods=['POST'])
+def post_message():
+    try:
+        data = request.get_json()  # Parse JSON data
+        uniqueID = str(data.get('uniqueID'))
+        message = str(data.get('message'))
+        messages[uniqueID] = message
+    
+        # Process the data
+        return jsonify({
+            'receivedUniqueID': uniqueID,
+            'receivedDeviceCount': message
+        }), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
+    
+@app.route('/message/get', methods = ['GET'])
+def get_messsage():
+    data = request.get_json()  # Parse JSON data
+    uniqueID = str(data.get('uniqueID'))
+    message = messages[uniqueID]
+    if message == " ":
+        message = "no new message"
+    response = {
+        'message': message
+    }
+    
+    # Return JSON response
+    return jsonify(response)
+    
 
 # api for client to retrive generated heatmap
 # every request will generate new heatmap with most updated zone population density
