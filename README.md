@@ -1,3 +1,9 @@
+'/home/hang_zhengyang1010/.local/bin'
+
+export PATH="/home/hang_zhengyang1010/.local/bin:$PATH"
+
+
+
 
 <h1>File structure </h1>
 
