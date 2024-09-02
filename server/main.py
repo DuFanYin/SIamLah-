@@ -23,7 +23,7 @@ zone_number = {
 messages = {
     "admin" : " ",
     "participant" : " ",
-    "hub_1" : " ",
+    "hub_1" : "this is old message, not updated",
     "hub_2" : " ",
     "hub_3" : " "
     }
@@ -69,18 +69,14 @@ def post_message():
     except Exception as e:
         return jsonify({'error': str(e)}), 400
     
-@app.route('/message/get', methods = ['GET'])
-def get_messsage():
-    data = request.get_json()  # Parse JSON data
-    uniqueID = str(data.get('uniqueID'))
-    message = messages[uniqueID]
-    if message == " ":
-        message = "no new message"
-    response = {
-        'message': message
-    }
+@app.route('/message/get/<uniqueID>', methods = ['GET'])
+def get_messsage(uniqueID):
+    id = uniqueID
+    message = messages.get(id)
     
-    # Return JSON response
+    response = {
+        'message' : message
+    }
     return jsonify(response)
     
 
