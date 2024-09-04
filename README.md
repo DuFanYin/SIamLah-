@@ -1,4 +1,11 @@
 
+<h1> Project for Ellipsis Tech Series Hackathon 2024 </h1>
+<h2> Awarded 1st place</h2>
+
+[Peoject proposal, demo video and putch slides](https://drive.google.com/drive/folders/1tsLtgDUuwG4EH23EmiOlaMTn1qXxCQBe?usp=sharing)
+
+
+
 
 <h1>File structure </h1>
 
@@ -14,9 +21,6 @@
     - App.tsx                 # main client side code
 
 
-
-password for admin login: admin123
-qr code:  scan any qrcode
 
 
 <h1>Funcitons used in service layer</h1>
