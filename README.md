@@ -1,8 +1,8 @@
 
-<h1> Project for Ellipsis Tech Series Hackathon 2024 </h1>
-<h2> Awarded 1st place</h2>
+<h1> Winning Solution for SMU Ellipsis Hackathon</h1>
+</h2>Crowd Control Management Using Bluetooth</h2>
 
-[Peoject proposal, demo video and putch slides](https://drive.google.com/drive/folders/1tsLtgDUuwG4EH23EmiOlaMTn1qXxCQBe?usp=sharing)
+[Project proposal, demo video and pitch slides](https://drive.google.com/drive/folders/1tsLtgDUuwG4EH23EmiOlaMTn1qXxCQBe?usp=sharing)
 
 
 
